@@ -31,6 +31,10 @@ recording() {
 }
 
 begin_recording() {
+	if [[ ! -p $FIFO ]]; then
+		mkfifo $FIFO
+	fi
+
 	# prep the webcam
 	${v4l2ctl} --set-fmt-video=width=$VIDEO_WIDTH,height=$VIDEO_HEIGHT,pixelformat=1
 	${v4l2ctl} --set-parm=$FRAMERATE
