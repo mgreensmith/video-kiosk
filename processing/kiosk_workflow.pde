@@ -43,15 +43,15 @@ void captureEvent(GSCapture cam) {
   cam.read();
 }
 
-void drawOutlineString(String theText, int x, int y) {
+void drawOutlineString(String theText, int x, int y, int sz, int fillcolor) {
   fill(#000000);
 
 
-  text(theText, x-10, y+10);
-  text(theText, x-10, y-10);
-  text(theText, x+10, y+10);
-  text(theText, x+10, y-10);  
-  fill(#ffffff);
+  text(theText, x-sz, y+sz);
+  text(theText, x-sz, y-sz);
+  text(theText, x+sz, y+sz);
+  text(theText, x+sz, y-sz);  
+  fill(fillcolor);
   text(theText, x, y);
 }
 
@@ -59,18 +59,18 @@ void startRec() {
   seqtime = millis() - starttime;
   if ( seqtime < 1000 ) {
     textFont(f1000);
-    drawOutlineString("5", 340, 840);
+    drawOutlineString("5", 340, 840, 10, #ffffff);
   } else if ( seqtime < 2000 ) {
-    drawOutlineString("4", 340, 840);
+    drawOutlineString("4", 340, 840, 10, #ffffff);
   } else if ( seqtime < 3000 ) {
-    drawOutlineString("3", 340, 840);
+    drawOutlineString("3", 340, 840, 10, #ffffff);
   } else if ( seqtime < 4000 ) {
-    drawOutlineString("2", 340, 840);
+    drawOutlineString("2", 340, 840, 10, #ffffff);
   } else if ( seqtime < 5000 ) {
-    drawOutlineString("1", 340, 840);
+    drawOutlineString("1", 340, 840, 10, #ffffff);
   } else if ( seqtime < 6000 ) {
     textFont(f1000,600);
-    drawOutlineString("GO!", 80, 740);
+    drawOutlineString("GO!", 80, 740, 7, #ffffff);
     // account for startup time of the capture pipeline
     if ( ! recording ) {
       // start capture process here!
@@ -89,7 +89,7 @@ void stopRec() {
   seqtime = millis() - stoptime;
   if ( seqtime < 3000 ) {
     textFont(f1000,300);
-    drawOutlineString("Thanks!", 80, 500);
+    drawOutlineString("Thanks!", 80, 500, 5, #ffffff);
   } else {
     stopping = false;
   }
@@ -126,12 +126,22 @@ void draw() {
     }  
     if ( textOn ) {
       fill(#bb0000);
-      textFont(f1000,100);
+      textFont(f1000,120);
       image(rec, 1050, 0);
-      text("REC", 850, 175);
+      drawOutlineString("REC", 850, 175, 3, #bb0000);
     }
+    textFont(f1000, 60);
+    drawOutlineString("PUSH BUTTON TO STOP RECORDING", 60, 900, 2, #ffffff);
   } else {
-    // print starting instructions
+    textFont(f1000, 200);
+    drawOutlineString("VIDEO", 300, 200, 4, #ffffff);
+    textFont(f1000, 185);
+    drawOutlineString("GUESTBOOK", 30, 370, 4, #ffffff);
+    textFont(f1000, 85);
+    drawOutlineString("PUSH THE BIG RED BUTTON", 50, 600, 3, #ffffff);
+    drawOutlineString("   TO RECORD A MESSAGE", 50, 700, 3, #ffffff);
+    drawOutlineString("    FOR JOHN AND JACQUI!", 50, 800, 3, #ffffff);
+   // drawOutlineString("PUSH BUTTON TO RECORD", 50, 900, 2, #ffffff);
   }
  
   
