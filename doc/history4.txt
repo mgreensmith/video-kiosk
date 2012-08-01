@@ -1,0 +1,375 @@
+    1  sudo su
+    2  ifconfig
+    3  ping www.google.com
+    4  top
+    5  df -h
+    6  cat /dev/disk
+    7  cat /dev/disk/by-label/
+    8  ls /dev/disk/by-label/
+    9  ls /dev/disk/by-label/System\\x20Reserved 
+   10  cd /dev/disk/by-path/
+   11  ls
+   12  cd..
+   13  ls
+   14  cd ..
+   15  ls
+   16  cd by-id
+   17  ls
+   18  cd /dev/sda
+   19  cd /dev
+   20  ls
+   21  mkdir /data
+   22  su
+   23  apt-cache search gstreamer
+   24  apt-cache search gstreamer | grep ^gstreamer
+   25  sudo apt-get install libgstreamer0.10-dev 
+   26  sudo apt-get install libgstreamer-plugins-base0.10-dev libgstreamer0.10-dev libglib2.0-dev
+   27  gst-inspect
+   28  sudo apt-get install gstreamer-tools
+   29  gst-inspect
+   30  gst-inspect | grep avi
+   31  gst-inspect | grep xvid
+   32  apt-cache search gstreamer | grep ugly
+   33  sudo apt-get install gstreamer0.10-plugins-ugly
+   34  gst-inspect | grep xvid
+   35  sudo apt-get install gstreamer0.10-plugins-bad
+   36  service --status-all
+   37  apt-cache search sshd
+   38  sudo apt-get install openssh-server
+   39  ifconfig
+   40  gst-inspect | grep xvid
+   41  gst-launch videotestsrc ! video/x-raw-rgb, framerate=25/1, width=640, height=360 ! ximagesink
+   42  gst-launch videotestsrc ! video/x-raw-rgb, framerate=25/1, width=640, height=360 ! xvimagesink
+   43  gst-launch videotestsrc ! video/x-raw-rgb, framerate=25/1, width=640, height=360 ! autovideosink
+   44  sudo apt-get install gstreamer0.10-x 
+   45  gst-launch videotestsrc ! video/x-raw-rgb, framerate=25/1, width=640, height=360 ! ximagesink
+   46  gst-launch v4l2src ! xvimagesink
+   47  gst-launch v4l2src ! ximagesink
+   48  gst-launch v4l2src ! xvimagesink
+   49  gst-launch videotestsrc ! video/x-raw-yuv,width=640,height=480,framerate=15/1 ! textoverlay text="Hello" !   ffmpegcolorspace ! ximagesink
+   50  gst-launch -e v4l2src ! video/x-raw-yuv, framerate=10/1, width=320, height=240 ! ffmpegcolorspace !                x264enc bitrate=256 ! flutsmux ! filesink location=webcam.ts
+   51  gst-launch -e v4l2src ! video/x-raw-yuv, framerate=10/1, width=320, height=240 ! ffmpegcolorspace ! x264enc bitrate=256 ! flutsmux ! filesink location=webcam.ts
+   52  gst-inspect | grep mux
+   53  gst-launch -e v4l2src ! video/x-raw-yuv, framerate=10/1, width=320, height=240 ! ffmpegcolorspace ! x264enc bitrate=256 ! mpegtsmux ! filesink location=webcam.mpeg
+   54  ls
+   55  ls -la
+   56  ls -lah
+   57  gst-launch -e v4l2src ! video/x-raw-yuv, framerate=30/1, width=1024, height=768 ! ffmpegcolorspace ! x264enc bitrate=2000 ! mpegtsmux ! filesink location=webcam.mpeg
+   58  gst-launch -e v4l2src ! video/x-raw-yuv, framerate=10/1, width=1024, height=768 ! ffmpegcolorspace ! x264enc bitrate=2000 ! mpegtsmux ! filesink location=webcam.mpeg
+   59  gst-launch -e v4l2src ! video/x-raw-yuv, framerate=30/1, width=1280, height=960 ! ffmpegcolorspace ! x264enc bitrate=2000 ! mpegtsmux ! filesink location=webcam.mpeg
+   60  gst-launch -e v4l2src ! video/x-raw-yuv, framerate=30/1, width=640, height=480 ! ffmpegcolorspace ! x264enc bitrate=2000 ! mpegtsmux ! filesink location=webcam.mpeg
+   61  gst-launch -e v4l2src ! video/x-raw-yuv, framerate=30/1, width=640, height=480 ! ffmpegcolorspace ! x264enc bitrate=512 ! mpegtsmux ! filesink location=webcam.mpeg
+   62  gst-launch -e v4l2src ! video/x-raw-yuv, framerate=30/1, width=640, height=480 ! ffmpegcolorspace ! queue ! x264enc bitrate=1024 ! mpegtsmux ! filesink location=webcam.mpeg
+   63  gst-launch -e v4l2src ! video/x-raw-yuv, framerate=30/1, width=640, height=480 ! ffmpegcolorspace ! queue ! x264enc bitrate=1024 ! queue ! mpegtsmux ! filesink location=webcam.mpeg
+   64  gst-inspect | grep mjpeg
+   65  gst-inspect | grep mjpg
+   66  gst-inspect | grep jpg
+   67  gst-inspect | grep jpeg
+   68  gst-inspect | grep v4l2
+   69  gst-inspect v4l2src
+   70  gst-launch -e v4l2src ! video/mpegts | queue ! mpegtsmux ! filesink location=webcam.mpeg
+   71  gst-launch -e v4l2src ! "video/mpegts" | queue ! mpegtsmux ! filesink location=webcam.mpeg
+   72  gst-launch -e v4l2src input-src=composite always-copy=FALSE ! video/x-raw-yuv,format=\(fourcc\)NV12,width=1280,height=720 ! dmaiaccel ! dmaiperf print-arm-load=true ! dmaienc_h264 encodingpreset=2 targetbitrate=1000000 ratecontrol=2 ! queue ! mux. alsasrc ! dmaienc_aac outputBufferSize=131072 bitrate=44000 ! mux. ffmux_mpegts name=mux ! filesink location=wc.mpeg
+   73  gst-launch -e v4l2src always-copy=FALSE ! video/x-raw-yuv,format=\(fourcc\)NV12,width=1280,height=720 ! dmaiaccel ! dmaiperf print-arm-load=true ! dmaienc_h264 encodingpreset=2 targetbitrate=1000000 ratecontrol=2 ! queue ! mux. alsasrc ! dmaienc_aac outputBufferSize=131072 bitrate=44000 ! mux. ffmux_mpegts name=mux ! filesink location=wc.mpeg
+   74  gst-launch -e -v v4l2src device="/dev/video1" ! video/x-raw-yuv, framerate=25/1, width=640, height=360 !    timeoverlay halign=right valign=bottom shaded-background=true !    textoverlay text="Test Video 640x360 25fps" halign=left valign=bottom shaded-background=true !    x264enc bitrate=498 ! mpegtsmux ! filesink location=video1.mpeg
+   75  gst-launch -e -v v4l2src ! video/x-raw-yuv, framerate=25/1, width=640, height=360 !    timeoverlay halign=right valign=bottom shaded-background=true !    textoverlay text="Test Video 640x360 25fps" halign=left valign=bottom shaded-background=true !    x264enc bitrate=498 ! mpegtsmux ! filesink location=video1.mpeg
+   76  gst-launch -e -v v4l2src ! video/x-raw-yuv, framerate=25/1, width=640, height=360 !    timeoverlay halign=right valign=bottom shaded-background=true !    textoverlay text="Test Video 640x360 25fps" halign=left valign=bottom shaded-background=true !    x264enc bitrate=2000 ! mpegtsmux ! filesink location=video1.mpeg
+   77  gst-launch -e -v v4l2src ! video/x-raw-yuv, framerate=30/1, width=640, height=360 !    timeoverlay halign=right valign=bottom shaded-background=true !    textoverlay text="Test Video 640x360 30fps" halign=left valign=bottom shaded-background=true !    x264enc bitrate=2000 ! mpegtsmux ! filesink location=video1.mpeg
+   78  gst-launch -e -v v4l2src ! video/x-raw-yuv, framerate=30/1, width=640, height=360 ! x264enc bitrate=2000 ! mpegtsmux ! filesink location=video1.mpeg
+   79  lsusb
+   80  lsusb -v 046d:081a
+   81  lsusb -v -d 046d:081a
+   82  lsusb -v -d 046d:081a | less
+   83  gst-launch v4l2src ! 'video/x-raw-yuv,width=640,height=480,framerate=30/1' ! tee name=t_vid ! queue ! xvimagesink sync=false t_vid. ! queue ! videorate ! 'video/x-raw-yuv,framerate=30/1' ! theoraenc ! queue ! oggmux ! filesink location=me_funny_dancing.ogg
+   84  gst-launch v4l2src ! 'video/x-raw-yuv,width=640,height=360,framerate=30/1' ! tee name=t_vid ! queue ! xvimagesink sync=false t_vid. ! queue ! videorate ! 'video/x-raw-yuv,framerate=30/1' ! x264enc bitrate=2000 ! queue ! mpegtsmux ! filesink location=testvid.mpeg
+   85  gst-launch v4l2src ! 'video/x-raw-yuv,width=640,height=360,framerate=30/1' ! tee name=t_vid ! xvimagesink sync=false t_vid. ! x264enc bitrate=2000 ! queue ! mpegtsmux ! filesink location=testvid.mpeg
+   86  gst-launch v4l2src ! 'video/x-raw-yuv,width=640,height=360,framerate=30/1' ! tee name=t_vid ! queue ! xvimagesink sync=false t_vid. ! 'video/x-raw-yuv,framerate=30/1' ! x264enc bitrate=2000 ! queue ! mpegtsmux ! filesink location=testvid.mpeg
+   87  gst-launch v4l2src ! 'video/x-raw-yuv,width=640,height=360,framerate=30/1' ! tee name=t_vid ! queue ! xvimagesink sync=false t_vid. ! queue ! 'video/x-raw-yuv,framerate=30/1' ! x264enc bitrate=2000 ! queue ! mpegtsmux ! filesink location=testvid.mpeg
+   88  gst-launch v4l2src ! 'video/x-raw-yuv,width=640,height=360,framerate=30/1' ! tee name=t_vid ! queue ! xvimagesink sync=false t_vid. ! queue ! videorate ! 'video/x-raw-yuv,framerate=30/1' ! x264enc bitrate=2000 ! queue ! mpegtsmux ! filesink location=testvid.mpeg
+   89  gst-launch v4l2src ! 'video/x-raw-yuv,width=640,height=360,framerate=25/1' ! tee name=t_vid ! queue ! xvimagesink sync=false t_vid. ! queue ! videorate ! 'video/x-raw-yuv,framerate=25/1' ! x264enc bitrate=2000 ! queue ! mpegtsmux ! filesink location=testvid.mpeg
+   90  gst-launch -e -v v4l2src ! video/x-raw-yuv, framerate=30/1, width=640, height=360 ! x264enc bitrate=2000 ! mpegtsmux ! filesink location=video1.mpeg
+   91  gst-launch -e -v v4l2src ! video/x-raw-yuv, framerate=30/1, width=640, height=360 ! x264enc bitrate=1000 ! mpegtsmux ! filesink location=video1.mpeg
+   92  gst-launch -e -v v4l2src ! video/x-raw-yuv, framerate=30/1, width=640, height=360 ! x264enc bitrate=512 ! mpegtsmux ! filesink location=video1.mpeg
+   93  gst-launch v4l2src ! 'video/x-raw-yuv,width=640,height=360,framerate=25/1' ! tee name=t_vid ! queue ! xvimagesink sync=false t_vid. ! queue ! videorate ! 'video/x-raw-yuv,framerate=25/1' ! x264enc bitrate=512 ! queue ! mpegtsmux ! filesink location=testvid.mpeg
+   94  gst-launch v4l2src ! 'video/x-raw-yuv,width=640,height=360,framerate=25/1' ! tee name=t_vid ! queue ! xvimagesink sync=false t_vid. ! queue ! videorate ! 'video/x-raw-yuv,framerate=25/1' ! queue ! mpegtsmux ! filesink location=testvid.mpeg
+   95  gst-launch v4l2src ! 'video/x-raw-yuv,width=640,height=360,framerate=25/1' ! tee name=t_vid ! queue ! xvimagesink sync=false t_vid. ! queue ! videorate ! 'video/x-raw-yuv,framerate=25/1' ! mpegtsmux ! filesink location=testvid.mpeg
+   96  gst-launch v4l2src ! 'video/x-raw-yuv,width=640,height=360,framerate=25/1' ! tee name=t_vid ! queue ! xvimagesink sync=false t_vid. ! queue ! videorate ! 'video/x-raw-yuv,framerate=25/1' ! avimux ! filesink location=testvid.avi
+   97  gst-launch v4l2src ! 'video/x-raw-yuv,width=640,height=360,framerate=25/1' ! tee name=t_vid ! queue ! xvimagesink sync=false t_vid. ! queue ! videorate ! 'video/x-raw-yuv,framerate=25/1' ! mp4mux ! filesink location=testvid.mpeg
+   98  gst-launch v4l2src ! 'video/x-raw-yuv,width=640,height=360,framerate=25/1' ! tee name=t_vid ! queue ! xvimagesink sync=false t_vid. ! queue ! videorate ! 'video/x-raw-yuv,framerate=25/1' ! queue ! mp4mux ! filesink location=testvid.mpeg
+   99  gst-launch v4l2src ! 'video/x-raw-yuv,width=640,height=360,framerate=25/1' ! tee name=t_vid ! queue ! xvimagesink sync=false t_vid. ! queue ! videorate ! 'video/x-raw-yuv,framerate=25/1' ! queue ! avimux ! filesink location=testvid.avi
+  100  gst-launch v4l2src ! 'video/x-raw-yuv,width=640,height=360,framerate=25/1' ! tee name=t_vid ! queue ! xvimagesink sync=false t_vid. ! queue ! videorate ! 'video/x-raw-yuv,framerate=25/1' ! x264enc bitrate=512 ! queue ! avimux ! filesink location=testvid920.avi
+  101  gst-inspect x264enc
+  102  gst-launch -e -v v4l2src ! video/x-raw-yuv, framerate=30/1, width=640, height=360 ! x264enc bitrate=2000 ! mpegtsmux ! filesink location=video1.mpeg
+  103  gst-launch -e -v v4l2src ! video/x-raw-yuv, framerate=30/1, width=1920, height=1080 !  avimux ! filesink location=videoraw.avi
+  104  history
+  105  history > history1.txt
+  106  vi capture.c
+  107  cat capture.
+  108  cat capture.c 
+  109  head capture.c 
+  110  vi capture.c 
+  111  ls
+  112  rm capture.avi 
+  113  rm me_funny_dancing.ogg 
+  114  rm testvid*
+  115  ls
+  116  rm video1.mpeg 
+  117  rm webcam.mpeg 
+  118  ls
+  119  gcc -O2 -Wall `pkg-config --cflags --libs libv4l2` capture.c -o capture
+  120  ls
+  121  ls -la
+  122  v4l2-ctl --set-fmt-video=width=800,height=448,pixelformat=1
+  123  v4l2-ctl --set-parm=30
+  124  ./capture > cap.avi
+  125  ./capture 
+  126  ls
+  127  ./capture -c 100000 -o | gst-launch -v -e filesrc location=/dev/fd/0 ! h264parse ! decodebin2 ! xvimagesink sync=false
+  128  gdt-inspect | grep decodebin
+  129  gst-inspect | grep decodebin
+  130  ./capture -c 100000 -o | gst-launch -v -e filesrc location=/dev/fd/0 ! h264parse ! uridecodebin ! xvimagesink sync=false
+  131  ./capture -c 100000 -o | gst-launch -v -e filesrc location=/dev/fd/0 ! h264parse ! decodebin ! xvimagesink sync=false
+  132  sudo apt-get install gst-ffmpeg
+  133  apt-cache search ffm | grep gstreamer
+  134  sudo apt-get install gstreamer0.10-ffmpeg
+  135  ./capture -c 100000 -o | gst-launch -v -e filesrc location=/dev/fd/0 ! h264parse ! decodebin ! xvimagesink sync=false
+  136  ./capture -c 100000 -o | gst-launch -v -e filesrc location=/dev/fd/0 ! h264parse ! decodebin2 ! fpsdisplaysink fps-update-interval=5000
+  137  v4l2-ctl --set-parm=25
+  138  ./capture -c 100000 -o | gst-launch -v -e filesrc location=/dev/fd/0 ! h264parse ! decodebin2 ! fpsdisplaysink fps-update-interval=5000
+  139  ./capture -c 100000 -o | gst-launch -v -e filesrc location=/dev/fd/0 ! h264parse ! decodebin ! xvimagesink sync=false
+  140  v4l2-ctl --set-fmt-video=width=1280,height=720,pixelformat=1
+  141  v4l2-ctl --set-parm=30
+  142  ./capture -c 100000 -o | gst-launch -v -e filesrc location=/dev/fd/0 ! h264parse ! decodebin2 ! fpsdisplaysink fps-update-interval=5000
+  143  v4l2-ctl --set-parm=24
+  144  ./capture -c 100000 -o | gst-launch -v -e filesrc location=/dev/fd/0 ! h264parse ! decodebin2 ! fpsdisplaysink fps-update-interval=5000
+  145  ./capture -c 100000 -o | gst-launch -v -e filesrc location=/dev/fd/0 tee name=vid | h264parse ! decodebin2 ! fpsdisplaysink fps-update-interval=5000 vid. avimux | filesink location=output.avi
+  146  history
+  147  ./capture -c 100000 -o | gst-launch -v -e filesrc location=/dev/fd/0 tee name=vid | h264parse ! decodebin2 ! fpsdisplaysink fps-update-interval=5000 vid. ! queue ! avimux | filesink location=output.avi
+  148  ./capture -c 100000 -o | gst-launch -v -e filesrc location=/dev/fd/0 ! tee name=vid | h264parse ! decodebin2 ! fpsdisplaysink fps-update-interval=5000 vid. ! queue ! avimux | filesink location=output.avi
+  149  ./capture -c 100000 -o | gst-launch -v -e filesrc location=/dev/fd/0 ! tee name=vid ! h264parse ! decodebin2 ! fpsdisplaysink fps-update-interval=5000 vid. ! queue ! avimux | filesink location=output.avi
+  150  ./capture -c 100000 -o | gst-launch -v -e filesrc location=/dev/fd/0 ! tee name=vid ! h264parse ! decodebin2 ! fpsdisplaysink fps-update-interval=5000 vid. ! queue ! avimux ! filesink location=output.avi
+  151  ./capture -c 100000 -o | gst-launch -v -e filesrc location=/dev/fd/0 ! tee name=vid ! h264parse ! decodebin2 ! fpsdisplaysink fps-update-interval=5000 vid. ! queue ! mpegtsmux ! filesink location=output.mp4
+  152  ./capture -c 100000 -o | gst-launch -v -e filesrc location=/dev/fd/0 ! tee name=vid ! h264parse ! decodebin2 ! fpsdisplaysink fps-update-interval=5000 vid. ! queue ! avimux ! filesink location=output.mp4
+  153  ./capture -c 100000 -o | gst-launch -v -e filesrc location=/dev/fd/0 ! tee name=vid ! h264parse ! decodebin2 ! fpsdisplaysink fps-update-interval=5000 vid. ! queue ! matroskamux ! filesink location=output.mkv
+  154  ls
+  155  ./capture -c 100000 -o | gst-launch -v -e filesrc location=/dev/fd/0 ! h264parse ! tee name=vid ! decodebin2 ! fpsdisplaysink fps-update-interval=5000 vid. ! queue ! mux. alsasrc num-buffers=240 ! queue ! audioconvert ! queue ! ffenc_aac ! queue ! mux. avimux ! filesink location=output.mp4
+  156  sudo apt-get install gstreamer0.10-alsa 
+  157  ./capture -c 100000 -o | gst-launch -v -e filesrc location=/dev/fd/0 ! h264parse ! tee name=vid ! decodebin2 ! fpsdisplaysink fps-update-interval=5000 vid. ! queue ! mux. alsasrc num-buffers=240 ! queue ! audioconvert ! queue ! ffenc_aac ! queue ! mux. avimux ! filesink location=output.mp4
+  158  ./capture -c 100000 -o | gst-launch -v -e filesrc location=/dev/fd/0 ! h264parse ! tee name=vid ! decodebin2 ! fpsdisplaysink fps-update-interval=5000 vid. ! queue ! mux. alsasrc num-buffers=240 ! queue ! audioconvert ! queue ! ffenc_aac ! queue ! mux. avimux name=mux ! filesink location=output.mp4
+  159  ./capture -c 100000 -o | gst-launch -v -e filesrc location=/dev/fd/0 ! h264parse ! tee name=vid ! decodebin2 ! fpsdisplaysink fps-update-interval=5000 vid. ! queue ! mux. alsasrc device=hw:0,0 ! audio/x-raw-int,rate=48000,channels=2,depth=16 ! queue ! audioconvert ! queue ! ffenc_aac ! queue ! mux. avimux name=mux ! filesink location=output.mp4
+  160  alsamixer
+  161  ./capture -c 100000 -o | gst-launch -v -e filesrc location=/dev/fd/0 ! h264parse ! tee name=vid ! decodebin2 ! fpsdisplaysink fps-update-interval=5000 vid. ! queue ! mux. alsasrc device=hw:1,0 ! audio/x-raw-int,rate=48000,channels=2,depth=16 ! queue ! audioconvert ! queue ! ffenc_aac ! queue ! mux. avimux name=mux ! filesink location=output.mp4
+  162  ./capture -c 100000 -o | gst-launch -v -e filesrc location=/dev/fd/0 ! tee name=vid ! h264parse ! decodebin2 ! fpsdisplaysink fps-update-interval=5000 vid. ! queue ! mux. alsasrc device=hw:1,0 ! audio/x-raw-int,rate=48000,channels=2,depth=16 ! queue ! audioconvert ! queue ! ffenc_aac ! queue ! mux. avimux name=mux ! filesink location=output.mp4
+  163  ./capture -c 100000 -o | gst-launch -v -e filesrc location=/dev/fd/0 ! tee name=vid ! h264parse ! decodebin2 ! fpsdisplaysink fps-update-interval=5000 vid. ! queue ! mux. alsasrc device=hw:1,0 ! queue ! audioconvert ! queue ! ffenc_aac ! queue ! mux. avimux name=mux ! filesink location=output.mp4
+  164  pactl list | grep -A2 'Source #' | grep 'Name: ' | cut -d" " -f2
+  165  cat /proc/asound/cards
+  166  cat /proc/asound/devices 
+  167  ./capture -c 100000 -o | gst-launch -v -e filesrc location=/dev/fd/0 ! tee name=vid ! h264parse ! decodebin2 ! fpsdisplaysink fps-update-interval=5000 vid. ! queue ! mux. alsasrc device=hw:2,0 ! queue ! audioconvert ! queue ! ffenc_aac ! queue ! mux. avimux name=mux ! filesink location=output.mp4
+  168  gst-launch v4l2src ! 'video/x-raw-yuv,width=640,height=480,framerate=30/1' ! tee name=t_vid ! queue ! videoflip method=horizontal-flip ! xvimagesink sync=false t_vid. ! queue ! videorate ! 'video/x-raw-yuv,framerate=30/1' ! queue ! mux. alsasrc device=hw:1,0 ! audio/x-raw-int,rate=48000,channels=2,depth=16 ! queue ! audioconvert ! queue ! mux. avimux name=mux ! filesink testest.avi
+  169  gst-launch v4l2src ! 'video/x-raw-yuv,width=640,height=480,framerate=30/1' ! tee name=t_vid ! queue ! videoflip method=horizontal-flip ! xvimagesink sync=false t_vid. ! queue ! videorate ! 'video/x-raw-yuv,framerate=30/1' ! queue ! mux. alsasrc device=hw:2,0 ! audio/x-raw-int,rate=48000,channels=2,depth=16 ! queue ! audioconvert ! queue ! mux. avimux name=mux ! filesink testest.avi
+  170  gst-launch v4l2src ! 'video/x-raw-yuv,width=640,height=480,framerate=30/1' ! tee name=t_vid ! queue ! xvimagesink sync=false t_vid. ! queue ! videorate ! 'video/x-raw-yuv,framerate=30/1' ! queue ! mux. alsasrc device=hw:2,0 ! audio/x-raw-int,rate=48000,channels=2,depth=16 ! queue ! audioconvert ! queue ! mux. avimux name=mux ! filesink testest.avi
+  171  gst-launch v4l2src ! 'video/x-raw-yuv,width=640,height=480,framerate=30/1' ! tee name=t_vid ! queue ! xvimagesink sync=false t_vid. ! queue ! videorate ! 'video/x-raw-yuv,framerate=30/1' ! queue ! mux. alsasrc device=hw:2,0 ! audio/x-raw-int,rate=48000,channels=2,depth=16 ! queue ! audioconvert ! queue ! mux. avimux name=mux ! filesink location=testest.avi
+  172  arecord -l
+  173  top
+  174  apt-cache search v4l-utils
+  175  apt-cache search v4l
+  176  sudo apt-get install libv4l-0 libv4l-dev v4l-utils qv4l2 v4l2ucp
+  177  v4l2-ctl --list-formats
+  178  v4l2-ctl --list-formats-ext
+  179  apt-cache search build
+  180  apt-cache search build | grep ^build
+  181  sudo atpt-get install build-essential
+  182  sudo apt-get install build-essential
+  183  which gcc
+  184  which pkg-config
+  185  history
+  186  history > history2.txt
+  187  top
+  188  man tee
+  189  top
+  190  gst-inspect | grep aac
+  191  gst-inspect | grep alsa
+  192  v4l2-ctl --list-formats
+  193  v4l2-ctl --help
+  194  v4l2-ctl --get-audio-input
+  195  v4l2-ctl --get-audio-inpunts
+  196  v4l2-ctl --get-audio-inputs
+  197  v4l2-ctl --list-audio-inputs
+  198  v4l2-ctl --list-audio-outputs
+  199  gst-launch v4l2src ! 'video/x-raw-yuv,width=640,height=480,framerate=30/1' ! tee name=t_vid ! queue ! videoflip method=horizontal-flip ! xvimagesink sync=false t_vid. ! queue ! videorate ! 'video/x-raw-yuv,framerate=30/1' ! queue ! mux. alsasrc device=hw:1,0 ! audio/x-raw-int,rate=48000,channels=2,depth=16 ! queue ! audioconvert ! queue ! mux. avimux name=mux ! filesink location=me_dancing_funny.avi
+  200  gst-launch v4l2src ! 'video/x-raw-yuv,width=640,height=480,framerate=30/1' ! tee name=t_vid ! queue ! videoflip method=horizontal-flip ! xvimagesink sync=false t_vid. ! queue ! videorate ! 'video/x-raw-yuv,framerate=30/1' ! queue ! mux. alsasrc device=hw:2,0 ! audio/x-raw-int,rate=48000,channels=2,depth=16 ! queue ! audioconvert ! queue ! mux. avimux name=mux ! filesink location=me_dancing_funny.avi
+  201  arecord -l
+  202  gst-launch v4l2src ! 'video/x-raw-yuv,width=640,height=480,framerate=30/1' ! tee name=t_vid ! queue ! videoflip method=horizontal-flip ! xvimagesink sync=false t_vid. ! queue ! videorate ! 'video/x-raw-yuv,framerate=30/1' ! queue ! mux. alsasrc device=hw:2,0 ! audio/x-raw-int,rate=48000,channels=2,depth=16 ! queue ! audioconvert ! queue ! mux. avimux name=mux ! filesink location=me_dancing_funny.avi
+  203  gst-launch v4l2src ! 'video/x-raw-yuv,width=640,height=480,framerate=30/1' ! tee name=t_vid ! queue ! videoflip method=horizontal-flip ! xvimagesink sync=false t_vid. ! queue ! videorate ! 'video/x-raw-yuv,framerate=30/1' ! queue ! mux. alsasrc device=hw:1,0 ! audio/x-raw-int,rate=48000,channels=2,depth=16 ! queue ! audioconvert ! queue ! mux. avimux name=mux ! filesink location=me_dancing_funny.avi
+  204   gst-launch -e pulsesrc ! audioconvert ! lamemp3enc target=1 bitrate=64 cbr=true ! filesink location=audio.mp3
+  205  gst-launch -e pulsesrc ! audioconvert ! lamemp3enc target=1 bitrate=64 cbr=true ! filesink location=audio.mp3
+  206  gst-launch -e alsasrc device=hw2:0 ! audioconvert ! lamemp3enc target=1 bitrate=64 cbr=true ! filesink location=audio.mp3
+  207  gst-launch -e alsasrc device=hw:2,0 ! audioconvert ! lamemp3enc target=1 bitrate=64 cbr=true ! filesink location=audio.mp3
+  208  alsamixer
+  209  pidof pulseaudio
+  210  pulseaudio 
+  211  sudo apt-get install pulseaudio
+  212  pidof pulseaudio
+  213  /etc/init.d/pulseaudio start
+  214  pidof pulseaudio
+  215  ./capture -c 100000 -o | gst-launch -v -e filesrc location=/dev/fd/0 ! tee name=vid ! h264parse ! decodebin2 ! fpsdisplaysink fps-update-interval=5000 vid. ! queue ! mux. alsa_input.usb-046d_HD_Pro_Webcam_C920_DDAE38EF-02-C920.analog-stereo" ! audioconvert ! lamemp3enc target=1 bitrate=64 cbr=true  ! queue ! mux. avimux name=mux ! filesink location=output.mp4
+  216  ./capture -c 100000 -o | gst-launch -v -e filesrc location=/dev/fd/0 ! tee name=vid ! h264parse ! decodebin2 ! fpsdisplaysink fps-update-interval=5000 vid. ! queue ! mux. alsa_input.usb-046d_HD_Pro_Webcam_C920_DDAE38EF-02-C920.analog-stereo" ! audioconvert ! lamemp3enc target=1 bitrate=64 cbr=true ! queue ! mux. avimux name=mux ! filesink location=output.mp4
+  217  ./capture -c 100000 -o | gst-launch -v -e filesrc location=/dev/fd/0 ! tee name=vid ! h264parse ! decodebin2 ! fpsdisplaysink fps-update-interval=5000 vid. ! queue ! mux. alsa_input.usb-046d_HD_Pro_Webcam_C920_DDAE38EF-02-C920.analog-stereo" ! audioconvert ! lamemp3enc target=1 bitrate=64 cbr=true ! queue ! mux. avimux name=mux ! filesink location=output.mp4
+  218  ./capture -c 100000 -o | gst-launch -v -e filesrc location=/dev/fd/0 ! tee name=vid ! h264parse ! decodebin2 ! fpsdisplaysink fps-update-interval=5000 vid. ! queue ! mux. alsa_input.usb-046d_HD_Pro_Webcam_C920_DDAE38EF-02-C920.analog-stereo" ! audioconvert ! lamemp3enc target=1 bitrate=64 cbr=true ! queue ! mux. avimux name=mux ! filesink location=output.mp4
+  219   ./capture -c 100000 -o | gst-launch -v -e filesrc location=/dev/fd/0 ! tee name=vid ! h264parse ! decodebin2 ! fpsdisplaysink fps-update-interval=5000 vid. ! queue ! mux. pulsesrc device="alsa_input.usb-046d_HD_Pro_Webcam_C920_DDAE38EF-02-C920.analog-stereo" ! audioconvert ! lamemp3enc target=1 bitrate=64 cbr=true  ! queue ! mux. avimux name=mux ! filesink location=output.mp4
+  220  ./capture -c 100000 -o | gst-launch -v -e filesrc location=/dev/fd/0 ! tee name=vid ! h264parse ! decodebin2 ! fpsdisplaysink fps-update-interval=5000 vid. ! queue ! mux. pulsesrc device="alsa_input.usb-046d_HD_Pro_Webcam_C920_DDAE38EF-02-C920.analog-stereo" ! audioconvert ! lamemp3enc target=1 bitrate=64 cbr=true  ! queue ! mux. avimux name=mux ! filesink location=output.mp4
+  221  ./capture -c 100000 -o | gst-launch -v -e filesrc location=/dev/fd/0 ! h264parse ! tee name=vid ! decodebin2 ! fpsdisplaysink fps-update-interval=5000 vid. ! queue ! mux. pulsesrc device="alsa_input.usb-046d_HD_Pro_Webcam_C920_DDAE38EF-02-C920.analog-stereo" ! audioconvert ! lamemp3enc target=1 bitrate=64 cbr=true  ! queue ! mux. avimux name=mux ! filesink location=output.mp4
+  222  v4l2ctl --list
+  223  v4lctl 
+  224  v4l2-ctl --list
+  225  v4l2-ctl --list-formats
+  226  gst-inspect v4l2src
+  227  v4l2src ! video/x-h264 ! ffdec_h264 ! autovideosink
+  228  gst-launch -v -e v4l2src ! video/x-h264 ! ffdec_h264 ! autovideosink
+  229  ./capture -c 100000 -o | gst-launch -v -e filesrc location=/dev/fd/0 ! h264parse ! decodebin2 ! xvimagesink sync=false
+  230  ./capture -c 100000 -o | gst-launch -v -e filesrc location=/dev/fd/0 ! h264parse ! decodebin2 ! xvimagesink
+  231  ./capture -c 100000 -o | gst-launch -v -e filesrc location=/dev/fd/0 ! ffdec_h264xvimagesink sync=false
+  232  ./capture -c 100000 -o | gst-launch -v -e filesrc location=/dev/fd/0 ! ffdec_h264 ! xvimagesink sync=false
+  233  ./capture -c 100000 -o | gst-launch -v -e filesrc location=/dev/fd/0 ! h264parse ! decodebin2 ! xvimagesink sync=false
+  234  v4l2-ctl --set-fmt-video=width=800,height=448,pixelformat=1
+  235  v4l2-ctl --set-parm=30
+  236  ./capture -c 100000 -o | gst-launch -v -e filesrc location=/dev/fd/0 ! h264parse ! decodebin2 ! xvimagesink sync=false
+  237  ./capture -c 100000 -o | gst-launch -v -e filesrc location=/dev/fd/0 ! ffdec_h264 ! xvimagesink sync=false
+  238  ./capture -c 100000 -o | gst-launch -v -e filesrc location=/dev/fd/0 ! video/h264 ffdec_h264 ! xvimagesink sync=false
+  239  ./capture -c 100000 -o | gst-launch -v -e filesrc location=/dev/fd/0 ! video/x-h264 ffdec_h264 ! xvimagesink sync=false
+  240  gst-inspect ffdec_h264
+  241  ./capture -c 100000 -o | gst-launch -v -e filesrc location=/dev/fd/0 ! video/x-h264 ! ffdec_h264 ! xvimagesink sync=false
+  242  ./capture -c 100000 -o | gst-launch -v -e filesrc location=/dev/fd/0 ! 'video/x-h264 width=800 height=448 framerrate=30' ! ffdec_h264 ! xvimagesink sync=false
+  243  ./capture -c 100000 -o | gst-launch -v -e filesrc location=/dev/fd/0 ! 'video/x-h264 width=800 height=448 framerate=30' ! ffdec_h264 ! xvimagesink sync=false
+  244  ./capture -c 100000 -o | gst-launch -v -e filesrc location=/dev/fd/0 ! 'video/x-h264,width=800,height=448,framerate=30' ! ffdec_h264 ! xvimagesink sync=false
+  245  ./capture -c 100000 -o | gst-launch -v -e filesrc location=/dev/fd/0 ! h264parse ! 'video/x-h264,width=800,height=448,framerate=30' ! ffdec_h264 ! xvimagesink sync=false
+  246  gst-launch -v -e v4l2src ! 'video/x-h264,width=800,height=448,framerate=30' ! ffdec_h264 ! xvimagesink sync=false
+  247  ./capture -c 100000 -o | gst-launch -v -e filesrc location=/dev/fd/0 ! 'video/x-h264,width=800,height=448,framerate=30' ! ffdec_h264 ! xvimagesink sync=false
+  248  gst_inspect | grep h264
+  249  gst-inspect | grep h264
+  250  apt-cache search adobe-flash
+  251  apt-cache search flash
+  252  pactl list | grep -A2 'Source #' | grep 'Name: ' | cut -d" " -f2
+  253  sudo apt-get install pulseaudio-utils
+  254  pactl list | grep -A2 'Source #' | grep 'Name: ' | cut -d" " -f2
+  255  pactl
+  256  pactl list
+  257  pactl list | grep -A2 'Source #' | grep 'Name: ' | cut -d" " -f2
+  258  ps aux | grep gst
+  259  ps aux | grep v4
+  260  reboot
+  261  sudo init 6
+  262  history > history3.txt
+  263  gst-launch -e alsasrc device=hw:2,0 ! audioconvert ! lamemp3enc target=1 bitrate=64 cbr=true ! filesink location=audio.mp3
+  264  gst-launch -e alsasrc device=hw:2,0 ! audioconvert ! lamemp3enc target=1 bitrate=64 cbr=true ! filesink location=audio.mp3
+  265  ./capture -c 100000 -o | gst-launch -v -e filesrc location=/dev/fd/0 ! h264parse ! tee name=vid ! decodebin2 ! fpsdisplaysink fps-update-interval=5000 vid. ! queue ! mux. pulsesrc device="alsa_input.usb-046d_HD_Pro_Webcam_C920_DDAE38EF-02-C920.analog-stereo" ! audioconvert ! lamemp3enc target=1 bitrate=64 cbr=true  ! queue ! mux. avimux name=mux ! filesink location=output.mp
+  266  gst-launch -v -e pulsesrc device="alsa_input.usb-046d_HD_Pro_Webcam_C920_DDAE38EF-02-C920.analog-stereo" ! audioconvert ! lamemp3enc target=1 bitrate=64 cbr=true ! filesink location=output.mp3
+  267  gst-inpect v4l2src
+  268  gst-inspect v4l2src
+  269  ./capture -c 100000 -o | gst-launch -v -e filesrc location=/dev/fd/0 ! h264parse ! decodebin2 ! xvimagesink sync=false
+  270  v4l2-ctl --set-fmt-video=width=800,height=448,pixelformat=1
+  271  v4l2-ctl --set-parm=30
+  272  ./capture -c 100000 -o | gst-launch -v -e filesrc location=/dev/fd/0 ! h264parse ! decodebin2 ! xvimagesink sync=fals
+  273  ./capture -c 100000 -o | gst-launch -v -e filesrc location=/dev/fd/0 ! h264parse ! decodebin2 ! xvimagesink sync=false
+  274  ./capture -c 100000 -o | gst-launch -v -e filesrc location=/dev/fd/0 ! queue->"video/x-h264,width=(int)640,heigth=(int)480,framerate=(fraction)25/1" ! queue ! matraskamux ! filesink location="t.mkv"
+  275  ./capture -c 100000 -o | gst-launch -v -e filesrc location=/dev/fd/0 ! queue->"v ! eo/x-h264,width=(int)640,heigth=(int)480,framerate=(fraction)25/1" ! queue ! matraskamux ! filesink location="t.mkv"
+  276  ./capture -c 100000 -o | gst-launch -v -e filesrc location=/dev/fd/0 ! queue! "video/x-h264,width=(int)640,heigth=(int)480,framerate=(fraction)25/1" ! queue ! matraskamux ! filesink location="t.mkv"
+  277  ./capture -c 100000 -o | gst-launch -v -e filesrc location=/dev/fd/0 ! queue! "video/x-h264,width=(int)640,heigth=(int)480,framerate=(fraction)25/1" ! queue ! matroskamux ! filesink location="t.mkv"
+  278  ./capture -c 100000 -o | gst-launch -v -e filesrc location=/dev/fd/0 ! queue! "video/x-h264,width=800,heigth=448,framerate=30/1" ! queue ! matroskamux ! filesink location="t.mkv"
+  279  ./capture -c 100000 -o | gst-launch -v -e filesrc location=/dev/fd/0 ! queue ! "video/x-h264,width=800,height=448,framerate=30/1" ! queue ! matroskamux ! filesink location="t.mkv"
+  280  ./capture -c 100000 -o | gst-launch -v -e filesrc location=/dev/fd/0 ! h264parse ! decodebin2 ! queue ! "video/x-h264,width=800,height=448,framerate=30/1" ! queue ! mp4mux ! filesink location=video.mp4
+  281  ./capture -c 100000 -o | gst-launch -v -e filesrc location=/dev/fd/0 ! h264parse ! queue ! "video/x-h264,width=800,height=448,framerate=30/1" ! queue ! mp4mux ! filesink location=video.mp4
+  282  v4l2-ctl --list-formats-ext
+  283  v4l2-ctl --set-fmt-video=width=1920,height=1080,pixelformat=1
+  284  ./capture -c 100000 -o | gst-launch -v -e filesrc location=/dev/fd/0 ! h264parse ! queue ! "video/x-h264,width=1920,height=1080,framerate=30/1" ! queue ! mp4mux ! filesink location=video1920x1080.mp4
+  285  ./capture -c 100000 -o | gst-launch -v -e filesrc location=/dev/fd/0 ! h264parse ! queue ! "video/x-h264,width=800,height=448,framerate=30/1" ! queue !  mux. pulsesrc device="alsa_input.usb-046d_HD_Pro_Webcam_C920_DDAE38EF-02-C920.analog-stereo" ! audioconvert ! lamemp3enc target=1 bitrate=64 cbr=true  ! queue ! mux. mp4mux  name=mux ! filesink location=muxed1.mp4
+  286  v4l2-ctl --set-fmt-video=width=800,height=448,pixelformat=1
+  287  ./capture -c 100000 -o | gst-launch -v -e filesrc location=/dev/fd/0 ! h264parse ! queue ! "video/x-h264,width=800,height=448,framerate=30/1" ! queue !  mux. pulsesrc device="alsa_input.usb-046d_HD_Pro_Webcam_C920_DDAE38EF-02-C920.analog-stereo" ! audioconvert ! lamemp3enc target=1 bitrate=64 cbr=true  ! queue ! mux. mp4mux  name=mux ! filesink location=muxed1.mp4
+  288  ./capture -c 100000 -o | gst-launch -v -e filesrc location=/dev/fd/0 ! h264parse ! queue ! "video/x-h264,width=800,height=448,framerate=30/1" ! queue !  mux. pulsesrc device="alsa_input.usb-046d_HD_Pro_Webcam_C920_DDAE38EF-02-C920.analog-stereo" latency-time=5 ! audioconvert ! lamemp3enc target=1 bitrate=64 cbr=true  ! queue ! mux. mp4mux  name=mux ! filesink location=muxed1.mp4
+  289  ./capture -c 100000 -o | gst-launch -v -e filesrc location=/dev/fd/0 ! h264parse ! queue ! "video/x-h264,width=800,height=448,framerate=30/1" ! queue !  mux. pulsesrc device="alsa_input.usb-046d_HD_Pro_Webcam_C920_DDAE38EF-02-C920.analog-stereo" latency-time=4 ! audioconvert ! lamemp3enc target=1 bitrate=64 cbr=true  ! queue ! mux. mp4mux  name=mux ! filesink location=muxed1.mp4
+  290  ./capture -c 100000 -o | gst-launch -v -e filesrc location=/dev/fd/0 ! h264parse ! queue ! "video/x-h264,width=800,height=448,framerate=30/1" ! queue !  mux. pulsesrc device="alsa_input.usb-046d_HD_Pro_Webcam_C920_DDAE38EF-02-C920.analog-stereo" latency-time=1000 ! audioconvert ! lamemp3enc target=1 bitrate=64 cbr=true  ! queue ! mux. mp4mux  name=mux ! filesink location=muxed1.mp4
+  291  ./capture -c 100000 -o | gst-launch -v -e filesrc location=/dev/fd/0 ! h264parse ! queue ! "video/x-h264,width=800,height=448,framerate=30/1" ! queue !  mux. pulsesrc device="alsa_input.usb-046d_HD_Pro_Webcam_C920_DDAE38EF-02-C920.analog-stereo" latency-time=2000 ! audioconvert ! lamemp3enc target=1 bitrate=64 cbr=true  ! queue ! mux. mp4mux  name=mux ! filesink location=muxed1.mp4
+  292  ./capture -c 100000 -o | gst-launch -v -e filesrc location=/dev/fd/0 ! h264parse ! queue ! "video/x-h264,width=800,height=448,framerate=30/1" ! queue !  mux. pulsesrc device="alsa_input.usb-046d_HD_Pro_Webcam_C920_DDAE38EF-02-C920.analog-stereo" latency-time=2000 min-threshold-time=2000 ! audioconvert ! lamemp3enc target=1 bitrate=64 cbr=true  ! queue ! mux. mp4mux  name=mux ! filesink location=muxed1.mp4
+  293  ./capture -c 100000 -o | gst-launch -v -e filesrc location=/dev/fd/0 ! h264parse ! queue ! "video/x-h264,width=800,height=448,framerate=30/1" ! queue !  mux. pulsesrc device="alsa_input.usb-046d_HD_Pro_Webcam_C920_DDAE38EF-02-C920.analog-stereo" latency-time=2000 ! audioconvert ! audiodelay delaytime=1000 feedback=0 ! lamemp3enc target=1 bitrate=64 cbr=true  ! queue ! mux. mp4mux  name=mux ! filesink location=muxed1.mp4
+  294  ./capture -c 100000 -o | gst-launch -v -e filesrc location=/dev/fd/0 ! h264parse ! queue ! "video/x-h264,width=800,height=448,framerate=30/1" ! queue !  mux. pulsesrc device="alsa_input.usb-046d_HD_Pro_Webcam_C920_DDAE38EF-02-C920.analog-stereo" latency-time=2000 ! audioconvert ! audiodelay delaytime=1000 feedback=0 ! lamemp3enc target=1 bitrate=64 cbr=true  ! queue ! mux. mp4mux  name=mux ! filesink location=muxed-long.mp4
+  295  ./capture -c 100000 -o | gst-launch -v -e filesrc location=/dev/fd/0 ! h264parse ! queue ! "video/x-h264,width=800,height=448,framerate=30/1" ! queue !  mux. pulsesrc device="alsa_input.usb-046d_HD_Pro_Webcam_C920_DDAE38EF-02-C920.analog-stereo" latency-time=2000 ! audioconvert ! audiodelay delaytime=0 feedback=0 ! lamemp3enc target=1 bitrate=64 cbr=true  ! queue ! mux. mp4mux  name=mux ! filesink location=muxed-long.mp4
+  296  ./capture -c 100000 -o | gst-launch -v -e filesrc location=/dev/fd/0 ! h264parse ! queue ! "video/x-h264,width=800,height=448,framerate=30/1" ! queue !  mux. pulsesrc device="alsa_input.usb-046d_HD_Pro_Webcam_C920_DDAE38EF-02-C920.analog-stereo" latency-time=2000 ! audioconvert ! lamemp3enc target=1 bitrate=64 cbr=true  ! queue ! mux. mp4mux  name=mux ! filesink location=muxed-long.mp4
+  297  ./capture -c 100000 -o | gst-launch -v -e filesrc location=/dev/fd/0 ! h264parse ! queue ! "video/x-h264,width=800,height=448,framerate=30/1" ! queue !  mux. pulsesrc device="alsa_input.usb-046d_HD_Pro_Webcam_C920_DDAE38EF-02-C920.analog-stereo" latency-time=2000 ! audioconvert ! audiodelay drywet=0 feedback=0 ! lamemp3enc target=1 bitrate=64 cbr=true  ! queue ! mux. mp4mux  name=mux ! filesink location=muxed-long.mp4
+  298  ls
+  299  mkdir capture-vid
+  300  ls
+  301  mv capture_vid.sh capture-vid/
+  302  cd capture-vid/
+  303  ls
+  304  mv capture_vid.sh capture.sh 
+  305  ./capture.sh 
+  306  ls
+  307  cat capture_vid.pid 
+  308  rm capture_vid.pid 
+  309  ./capture.sh 
+  310  ls
+  311  mkfifo cap
+  312  ls
+  313  ls -al
+  314  gst-launch -v -e filesrc location=cap ! h264parse ! queue ! "video/x-h264,width=800,height=448,framerate=30/1" ! queue !  mux. pulsesrc device="alsa_input.usb-046d_HD_Pro_Webcam_C920_DDAE38EF-02-C920.analog-stereo" latency-time=2000 ! audioconvert ! audiodelay drywet=0 feedback=0 ! lamemp3enc target=1 bitrate=64 cbr=true  ! queue ! mux. mp4mux  name=mux ! filesink location=muxed-long.mp4
+  315  df -h
+  316  df
+  317  ps aux
+  318  pgrep capture
+  319  ps aux
+  320  gst-launch -v -e filesrc location=cap ! h264parse ! queue ! "video/x-h264,width=800,height=448,framerate=30/1" ! queue !  mux. pulsesrc device="alsa_input.usb-046d_HD_Pro_Webcam_C920_DDAE38EF-02-C920.analog-stereo" latency-time=2000 ! audioconvert ! audiodelay drywet=0 feedback=0 ! lamemp3enc target=1 bitrate=64 cbr=true  ! queue ! mux. mp4mux  name=mux ! filesink location=muxed-long.mp4
+  321  df -h
+  322  gst-launch -v -e filesrc location=cap ! h264parse ! queue ! "video/x-h264,width=800,height=448,framerate=30/1" ! queue !  mux. pulsesrc device="alsa_input.usb-046d_HD_Pro_Webcam_C920_DDAE38EF-02-C920.analog-stereo" latency-time=2000 ! audioconvert ! audiodelay drywet=0 feedback=0 ! lamemp3enc target=1 bitrate=64 cbr=true  ! queue ! mux. mp4mux  name=mux ! filesink location=muxed-long.mp4
+  323  gst-launch -v -e appsrc name=cap ! h264parse ! queue ! "video/x-h264,width=800,height=448,framerate=30/1" ! queue !  mux. pulsesrc device="alsa_input.usb-046d_HD_Pro_Webcam_C920_DDAE38EF-02-C920.analog-stereo" latency-time=2000 ! audioconvert ! audiodelay drywet=0 feedback=0 ! lamemp3enc target=1 bitrate=64 cbr=true  ! queue ! mux. mp4mux  name=mux ! filesink location=muxed-long.mp4
+  324  GST_DEBUG=3; gst-launch -v -e appsrc name=cap ! h264parse ! queue ! "video/x-h264,width=800,height=448,framerate=30/1" ! queue !  mux. pulsesrc device="alsa_input.usb-046d_HD_Pro_Webcam_C920_DDAE38EF-02-C920.analog-stereo" latency-time=2000 ! audioconvert ! audiodelay drywet=0 feedback=0 ! lamemp3enc target=1 bitrate=64 cbr=true  ! queue ! mux. mp4mux  name=mux ! filesink location=muxed-long.mp4
+  325  gst-launch -v -e filesrc location=cap ! h264parse ! queue ! "video/x-h264,width=800,height=448,framerate=30/1" ! queue !  mux. pulsesrc device="alsa_input.usb-046d_HD_Pro_Webcam_C920_DDAE38EF-02-C920.analog-stereo" latency-time=2000 ! audioconvert ! audiodelay drywet=0 feedback=0 ! lamemp3enc target=1 bitrate=64 cbr=true  ! queue ! mux. mp4mux  name=mux ! filesink location=muxed-long.mp4
+  326  ./capture.sh 
+  327  gst-launch -v -e filesrc location=cap ! h264parse ! queue ! "video/x-h264,width=800,height=448,framerate=30/1" ! queue !  mux. pulsesrc device="alsa_input.usb-046d_HD_Pro_Webcam_C920_DDAE38EF-02-C920.analog-stereo" latency-time=2000 ! audioconvert ! audiodelay drywet=0 feedback=0 ! lamemp3enc target=1 bitrate=64 cbr=true  ! queue ! mux. mp4mux  name=mux ! filesink location=muxed-long.mp4
+  328  ls
+  329  ./capture.sh 
+  330  ./capture -o | gst-launch -v -e filesrc location=/dev/fd/0 ! h264parse ! queue ! "video/x-h264,width=800,height=448,framerate=30/1" ! queue !  mux. pulsesrc device="alsa_input.usb-046d_HD_Pro_Webcam_C920_DDAE38EF-02-C920.analog-stereo" latency-time=2000 ! audioconvert ! audiodelay drywet=0 feedback=0 ! lamemp3enc target=1 bitrate=64 cbr=true  ! queue ! mux. mp4mux  name=mux ! filesink location=muxed-long.mp4
+  331  ./capture -c 1000000000000 -o | gst-launch -v -e filesrc location=/dev/fd/0 ! h264parse ! queue ! "video/x-h264,width=800,height=448,framerate=30/1" ! queue !  mux. pulsesrc device="alsa_input.usb-046d_HD_Pro_Webcam_C920_DDAE38EF-02-C920.analog-stereo" latency-time=2000 ! audioconvert ! audiodelay drywet=0 feedback=0 ! lamemp3enc target=1 bitrate=64 cbr=true  ! queue ! mux. mp4mux  name=mux ! filesink location=muxed-long.mp4
+  332  ./capture -c 100000 -o | gst-launch -v -e filesrc location=/dev/fd/0 ! h264parse ! queue ! "video/x-h264,width=800,height=448,framerate=30/1" ! queue !  mux. pulsesrc device="alsa_input.usb-046d_HD_Pro_Webcam_C920_DDAE38EF-02-C920.analog-stereo" latency-time=2000 ! audioconvert ! audiodelay drywet=0 feedback=0 ! lamemp3enc target=1 bitrate=64 cbr=true  ! queue ! mux. mp4mux  name=mux ! filesink location=muxed-long.mp4
+  333  capture -c 100000 -o | gst-launch -v -e filesrc location=/dev/fd/0 ! h264parse ! queue ! "video/x-h264,width=800,height=448,framerate=30/1" ! queue !  mux. pulsesrc device="alsa_input.usb-046d_HD_Pro_Webcam_C920_DDAE38EF-02-C920.analog-stereo" latency-time=2000 ! audioconvert ! audiodelay drywet=0 feedback=0 ! lamemp3enc target=1 bitrate=64 cbr=true  ! queue ! mux. mp4mux  name=mux ! filesink location=muxed-long.mp4
+  334  capture -o | gst-launch -v -e filesrc location=/dev/fd/0 ! h264parse ! queue ! "video/x-h264,width=800,height=448,framerate=30/1" ! queue !  mux. pulsesrc device="alsa_input.usb-046d_HD_Pro_Webcam_C920_DDAE38EF-02-C920.analog-stereo" latency-time=2000 ! audioconvert ! audiodelay drywet=0 feedback=0 ! lamemp3enc target=1 bitrate=64 cbr=true  ! queue ! mux. mp4mux  name=mux ! filesink location=muxed-long.mp4
+  335  capture -o | gst-launch -v -e fdsrc ! h264parse ! queue ! "video/x-h264,width=800,height=448,framerate=30/1" ! queue !  mux. pulsesrc device="alsa_input.usb-046d_HD_Pro_Webcam_C920_DDAE38EF-02-C920.analog-stereo" latency-time=2000 ! audioconvert ! audiodelay drywet=0 feedback=0 ! lamemp3enc target=1 bitrate=64 cbr=true  ! queue ! mux. mp4mux  name=mux ! filesink location=muxed-long.mp4
+  336  ./capture.sh 
+  337  ls
+  338  ./capture.sh 
+  339  capture -o | gst-launch -v -e filesrc location=/dev/fd/0 ! h264parse ! queue ! "video/x-h264,width=800,height=448,framerate=30/1" ! queue !  mux. pulsesrc device="alsa_input.usb-046d_HD_Pro_Webcam_C920_DDAE38EF-02-C920.analog-stereo" latency-time=2000 ! audioconvert ! audiodelay drywet=0 feedback=0 ! lamemp3enc target=1 bitrate=64 cbr=true  ! queue ! mux. mp4mux  name=mux ! filesink location=muxed-long.mp4
+  340  capture -o 2>err.txt | gst-launch -v -e filesrc location=/dev/fd/0 ! h264parse ! queue ! "video/x-h264,width=800,height=448,framerate=30/1" ! queue !  mux. pulsesrc device="alsa_input.usb-046d_HD_Pro_Webcam_C920_DDAE38EF-02-C920.analog-stereo" latency-time=2000 ! audioconvert ! audiodelay drywet=0 feedback=0 ! lamemp3enc target=1 bitrate=64 cbr=true  ! queue ! mux. mp4mux  name=mux ! filesink location=muxed-long.mp4
+  341  ls
+  342  cat err.txt 
+  343  capture -c 100000 -o | gst-launch -v -e filesrc location=/dev/fd/0 ! h264parse ! queue ! "video/x-h264,width=800,height=448,framerate=30/1" ! queue !  mux. pulsesrc device="alsa_input.usb-046d_HD_Pro_Webcam_C920_DDAE38EF-02-C920.analog-stereo" latency-time=2000 ! audioconvert ! audiodelay drywet=0 feedback=0 ! lamemp3enc target=1 bitrate=64 cbr=true  ! queue ! mux. mp4mux  name=mux ! filesink location=muxed-long.mp4
+  344  gst-launch -v -e filesrc location=cap ! h264parse ! queue ! "video/x-h264,width=800,height=448,framerate=30/1" ! queue !  mux. pulsesrc device="alsa_input.usb-046d_HD_Pro_Webcam_C920_DDAE38EF-02-C920.analog-stereo" latency-time=2000 ! audioconvert ! audiodelay drywet=0 feedback=0 ! lamemp3enc target=1 bitrate=64 cbr=true  ! queue ! mux. mp4mux  name=mux ! filesink location=muxed-long.mp4
+  345  gst-launch -v -e filesrc location=cap ! h264parse ! queue ! "video/x-h264,width=800,height=448,framerate=30/1" ! queue !  mux. pulsesrc device="alsa_input.usb-046d_HD_Pro_Webcam_C920_DDAE38EF-02-C920.analog-stereo" latency-time=2000 ! audioconvert ! audiodelay drywet=0 feedback=0 ! lamemp3enc target=1 bitrate=64 cbr=true  ! queue ! mux. mp4mux  name=mux ! filesink location=muxed-long.mp4 sync=false
+  346  gst-launch -e filesrc location=cap ! h264parse ! queue ! "video/x-h264,width=800,height=448,framerate=30/1" ! queue !  mux. pulsesrc device="alsa_input.usb-046d_HD_Pro_Webcam_C920_DDAE38EF-02-C920.analog-stereo" latency-time=2000 ! audioconvert ! audiodelay drywet=0 feedback=0 ! lamemp3enc target=1 bitrate=64 cbr=true  ! queue ! mux. mp4mux  name=mux ! filesink location=muxed-long.mp4 sync=false
+  347  gst-launch -e filesrc location=cap ! h264parse ! queue ! "video/x-h264,width=800,height=448,framerate=30/1" ! queue !  mux. pulsesrc device="alsa_input.usb-046d_HD_Pro_Webcam_C920_DDAE38EF-02-C920.analog-stereo" latency-time=2000 ! audioconvert ! audiodelay drywet=0 feedback=0 ! lamemp3enc target=1 bitrate=320 cbr=true  ! queue ! mux. mp4mux  name=mux ! filesink location=muxed-long.mp4 sync=false
+  348  killall gst-launch
+  349  pgrep gst-launch
+  350  kill 7066
+  351  kill 7085
+  352  pgrep gst-launch
+  353  gst-launch -e filesrc location=cap ! h264parse ! queue ! "video/x-h264,width=800,height=448,framerate=30/1" ! queue !  mux. pulsesrc device="alsa_input.usb-046d_HD_Pro_Webcam_C920_DDAE38EF-02-C920.analog-stereo" latency-time=2000 ! audioconvert ! audiodelay drywet=0 feedback=0 ! lamemp3enc target=1 bitrate=320 cbr=true  ! queue ! mux. mp4mux  name=mux ! filesink location=muxed-long.mp4 sync=false
+  354  gst-launch -e filesrc location=cap ! h264parse ! queue ! "video/x-h264,width=800,height=448,framerate=30/1" ! queue !  mux. pulsesrc device="alsa_input.usb-046d_HD_Pro_Webcam_C920_DDAE38EF-02-C920.analog-stereo" latency-time=2000 ! audioconvert ! audiodelay drywet=0 feedback=0 ! lamemp3enc target=1 bitrate=320 cbr=true  ! queue ! mux. mp4mux  name=mux ! filesink location=muxed-long.mp4
+  355  ps aux
+  356  arecord -l
+  357  cd /proc/asound/C110
+  358  ls
+  359  cat id 
+  360  cd pcm0c/
+  361  ls
+  362  cat info 
+  363  ls
+  364  cd ..
+  365  ls
+  366  cat devices 
+  367  man arecord
+  368  pactl list
+  369  pactl list | grep -A2 'Source #' | grep 'Name: ' | cut -d" " -f2
+  370  gst-launch -e filesrc location=cap ! h264parse ! queue ! "video/x-h264,width=800,height=448,framerate=30/1" ! queue !  mux. pulsesrc device="alsa_input.usb-_Webcam_C110-02-C110.analog-mono" latency-time=2000 ! audioconvert ! audiodelay drywet=0 feedback=0 ! lamemp3enc target=1 bitrate=320 cbr=true  ! queue ! mux. mp4mux  name=mux ! filesink location=muxed-long.mp4
+  371  cd
+  372  cd capture-vid/
+  373  gst-launch -e filesrc location=cap ! h264parse ! queue ! "video/x-h264,width=800,height=448,framerate=30/1" ! queue !  mux. pulsesrc device="alsa_input.usb-_Webcam_C110-02-C110.analog-mono" latency-time=2000 ! audioconvert ! audiodelay drywet=0 feedback=0 ! lamemp3enc target=1 bitrate=320 cbr=true  ! queue ! mux. mp4mux  name=mux ! filesink location=muxed-long.mp4
+  374  history 
+  375  history > ~/history4.txt

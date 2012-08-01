@@ -1,0 +1,53 @@
+    1  sudo su
+    2  ifconfig
+    3  ping www.google.com
+    4  top
+    5  df -h
+    6  cat /dev/disk
+    7  cat /dev/disk/by-label/
+    8  ls /dev/disk/by-label/
+    9  ls /dev/disk/by-label/System\\x20Reserved 
+   10  cd /dev/disk/by-path/
+   11  ls
+   12  cd..
+   13  ls
+   14  cd ..
+   15  ls
+   16  cd by-id
+   17  ls
+   18  cd /dev/sda
+   19  cd /dev
+   20  ls
+   21  mkdir /data
+   22  su
+   23  apt-cache search gstreamer
+   24  apt-cache search gstreamer | grep ^gstreamer
+   25  sudo apt-get install libgstreamer0.10-dev 
+   26  sudo apt-get install libgstreamer-plugins-base0.10-dev libgstreamer0.10-dev libglib2.0-dev
+   27  gst-inspect
+   28  sudo apt-get install gstreamer-tools
+   29  gst-inspect
+   30  gst-inspect | grep avi
+   31  gst-inspect | grep xvid
+   32  apt-cache search gstreamer | grep ugly
+   33  sudo apt-get install gstreamer0.10-plugins-ugly
+   34  gst-inspect | grep xvid
+   35  sudo apt-get install gstreamer0.10-plugins-bad
+   36  service --status-all
+   37  apt-cache search sshd
+   38  sudo apt-get install openssh-server
+   39  ifconfig
+   40  top
+   41  apt-cache search v4l-utils
+   42  apt-cache search v4l
+   43  sudo apt-get install libv4l-0 libv4l-dev v4l-utils qv4l2 v4l2ucp
+   44  v4l2-ctl --list-formats
+   45  v4l2-ctl --list-formats-ext
+   46  apt-cache search build
+   47  apt-cache search build | grep ^build
+   48  sudo atpt-get install build-essential
+   49  sudo apt-get install build-essential
+   50  which gcc
+   51  which pkg-config
+   52  history
+   53  history > history2.txt

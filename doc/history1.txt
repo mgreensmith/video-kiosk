@@ -1,0 +1,105 @@
+    1  sudo su
+    2  ifconfig
+    3  ping www.google.com
+    4  top
+    5  df -h
+    6  cat /dev/disk
+    7  cat /dev/disk/by-label/
+    8  ls /dev/disk/by-label/
+    9  ls /dev/disk/by-label/System\\x20Reserved 
+   10  cd /dev/disk/by-path/
+   11  ls
+   12  cd..
+   13  ls
+   14  cd ..
+   15  ls
+   16  cd by-id
+   17  ls
+   18  cd /dev/sda
+   19  cd /dev
+   20  ls
+   21  mkdir /data
+   22  su
+   23  apt-cache search gstreamer
+   24  apt-cache search gstreamer | grep ^gstreamer
+   25  sudo apt-get install libgstreamer0.10-dev 
+   26  sudo apt-get install libgstreamer-plugins-base0.10-dev libgstreamer0.10-dev libglib2.0-dev
+   27  gst-inspect
+   28  sudo apt-get install gstreamer-tools
+   29  gst-inspect
+   30  gst-inspect | grep avi
+   31  gst-inspect | grep xvid
+   32  apt-cache search gstreamer | grep ugly
+   33  sudo apt-get install gstreamer0.10-plugins-ugly
+   34  gst-inspect | grep xvid
+   35  sudo apt-get install gstreamer0.10-plugins-bad
+   36  service --status-all
+   37  apt-cache search sshd
+   38  sudo apt-get install openssh-server
+   39  ifconfig
+   40  gst-inspect | grep xvid
+   41  gst-launch videotestsrc ! video/x-raw-rgb, framerate=25/1, width=640, height=360 ! ximagesink
+   42  gst-launch videotestsrc ! video/x-raw-rgb, framerate=25/1, width=640, height=360 ! xvimagesink
+   43  gst-launch videotestsrc ! video/x-raw-rgb, framerate=25/1, width=640, height=360 ! autovideosink
+   44  sudo apt-get install gstreamer0.10-x 
+   45  gst-launch videotestsrc ! video/x-raw-rgb, framerate=25/1, width=640, height=360 ! ximagesink
+   46  gst-launch v4l2src ! xvimagesink
+   47  gst-launch v4l2src ! ximagesink
+   48  gst-launch v4l2src ! xvimagesink
+   49  gst-launch videotestsrc ! video/x-raw-yuv,width=640,height=480,framerate=15/1 ! textoverlay text="Hello" !   ffmpegcolorspace ! ximagesink
+   50  gst-launch -e v4l2src ! video/x-raw-yuv, framerate=10/1, width=320, height=240 ! ffmpegcolorspace !                x264enc bitrate=256 ! flutsmux ! filesink location=webcam.ts
+   51  gst-launch -e v4l2src ! video/x-raw-yuv, framerate=10/1, width=320, height=240 ! ffmpegcolorspace ! x264enc bitrate=256 ! flutsmux ! filesink location=webcam.ts
+   52  gst-inspect | grep mux
+   53  gst-launch -e v4l2src ! video/x-raw-yuv, framerate=10/1, width=320, height=240 ! ffmpegcolorspace ! x264enc bitrate=256 ! mpegtsmux ! filesink location=webcam.mpeg
+   54  ls
+   55  ls -la
+   56  ls -lah
+   57  gst-launch -e v4l2src ! video/x-raw-yuv, framerate=30/1, width=1024, height=768 ! ffmpegcolorspace ! x264enc bitrate=2000 ! mpegtsmux ! filesink location=webcam.mpeg
+   58  gst-launch -e v4l2src ! video/x-raw-yuv, framerate=10/1, width=1024, height=768 ! ffmpegcolorspace ! x264enc bitrate=2000 ! mpegtsmux ! filesink location=webcam.mpeg
+   59  gst-launch -e v4l2src ! video/x-raw-yuv, framerate=30/1, width=1280, height=960 ! ffmpegcolorspace ! x264enc bitrate=2000 ! mpegtsmux ! filesink location=webcam.mpeg
+   60  gst-launch -e v4l2src ! video/x-raw-yuv, framerate=30/1, width=640, height=480 ! ffmpegcolorspace ! x264enc bitrate=2000 ! mpegtsmux ! filesink location=webcam.mpeg
+   61  gst-launch -e v4l2src ! video/x-raw-yuv, framerate=30/1, width=640, height=480 ! ffmpegcolorspace ! x264enc bitrate=512 ! mpegtsmux ! filesink location=webcam.mpeg
+   62  gst-launch -e v4l2src ! video/x-raw-yuv, framerate=30/1, width=640, height=480 ! ffmpegcolorspace ! queue ! x264enc bitrate=1024 ! mpegtsmux ! filesink location=webcam.mpeg
+   63  gst-launch -e v4l2src ! video/x-raw-yuv, framerate=30/1, width=640, height=480 ! ffmpegcolorspace ! queue ! x264enc bitrate=1024 ! queue ! mpegtsmux ! filesink location=webcam.mpeg
+   64  gst-inspect | grep mjpeg
+   65  gst-inspect | grep mjpg
+   66  gst-inspect | grep jpg
+   67  gst-inspect | grep jpeg
+   68  gst-inspect | grep v4l2
+   69  gst-inspect v4l2src
+   70  gst-launch -e v4l2src ! video/mpegts | queue ! mpegtsmux ! filesink location=webcam.mpeg
+   71  gst-launch -e v4l2src ! "video/mpegts" | queue ! mpegtsmux ! filesink location=webcam.mpeg
+   72  gst-launch -e v4l2src input-src=composite always-copy=FALSE ! video/x-raw-yuv,format=\(fourcc\)NV12,width=1280,height=720 ! dmaiaccel ! dmaiperf print-arm-load=true ! dmaienc_h264 encodingpreset=2 targetbitrate=1000000 ratecontrol=2 ! queue ! mux. alsasrc ! dmaienc_aac outputBufferSize=131072 bitrate=44000 ! mux. ffmux_mpegts name=mux ! filesink location=wc.mpeg
+   73  gst-launch -e v4l2src always-copy=FALSE ! video/x-raw-yuv,format=\(fourcc\)NV12,width=1280,height=720 ! dmaiaccel ! dmaiperf print-arm-load=true ! dmaienc_h264 encodingpreset=2 targetbitrate=1000000 ratecontrol=2 ! queue ! mux. alsasrc ! dmaienc_aac outputBufferSize=131072 bitrate=44000 ! mux. ffmux_mpegts name=mux ! filesink location=wc.mpeg
+   74  gst-launch -e -v v4l2src device="/dev/video1" ! video/x-raw-yuv, framerate=25/1, width=640, height=360 !    timeoverlay halign=right valign=bottom shaded-background=true !    textoverlay text="Test Video 640x360 25fps" halign=left valign=bottom shaded-background=true !    x264enc bitrate=498 ! mpegtsmux ! filesink location=video1.mpeg
+   75  gst-launch -e -v v4l2src ! video/x-raw-yuv, framerate=25/1, width=640, height=360 !    timeoverlay halign=right valign=bottom shaded-background=true !    textoverlay text="Test Video 640x360 25fps" halign=left valign=bottom shaded-background=true !    x264enc bitrate=498 ! mpegtsmux ! filesink location=video1.mpeg
+   76  gst-launch -e -v v4l2src ! video/x-raw-yuv, framerate=25/1, width=640, height=360 !    timeoverlay halign=right valign=bottom shaded-background=true !    textoverlay text="Test Video 640x360 25fps" halign=left valign=bottom shaded-background=true !    x264enc bitrate=2000 ! mpegtsmux ! filesink location=video1.mpeg
+   77  gst-launch -e -v v4l2src ! video/x-raw-yuv, framerate=30/1, width=640, height=360 !    timeoverlay halign=right valign=bottom shaded-background=true !    textoverlay text="Test Video 640x360 30fps" halign=left valign=bottom shaded-background=true !    x264enc bitrate=2000 ! mpegtsmux ! filesink location=video1.mpeg
+   78  gst-launch -e -v v4l2src ! video/x-raw-yuv, framerate=30/1, width=640, height=360 ! x264enc bitrate=2000 ! mpegtsmux ! filesink location=video1.mpeg
+   79  lsusb
+   80  lsusb -v 046d:081a
+   81  lsusb -v -d 046d:081a
+   82  lsusb -v -d 046d:081a | less
+   83  gst-launch v4l2src ! 'video/x-raw-yuv,width=640,height=480,framerate=30/1' ! tee name=t_vid ! queue ! xvimagesink sync=false t_vid. ! queue ! videorate ! 'video/x-raw-yuv,framerate=30/1' ! theoraenc ! queue ! oggmux ! filesink location=me_funny_dancing.ogg
+   84  gst-launch v4l2src ! 'video/x-raw-yuv,width=640,height=360,framerate=30/1' ! tee name=t_vid ! queue ! xvimagesink sync=false t_vid. ! queue ! videorate ! 'video/x-raw-yuv,framerate=30/1' ! x264enc bitrate=2000 ! queue ! mpegtsmux ! filesink location=testvid.mpeg
+   85  gst-launch v4l2src ! 'video/x-raw-yuv,width=640,height=360,framerate=30/1' ! tee name=t_vid ! xvimagesink sync=false t_vid. ! x264enc bitrate=2000 ! queue ! mpegtsmux ! filesink location=testvid.mpeg
+   86  gst-launch v4l2src ! 'video/x-raw-yuv,width=640,height=360,framerate=30/1' ! tee name=t_vid ! queue ! xvimagesink sync=false t_vid. ! 'video/x-raw-yuv,framerate=30/1' ! x264enc bitrate=2000 ! queue ! mpegtsmux ! filesink location=testvid.mpeg
+   87  gst-launch v4l2src ! 'video/x-raw-yuv,width=640,height=360,framerate=30/1' ! tee name=t_vid ! queue ! xvimagesink sync=false t_vid. ! queue ! 'video/x-raw-yuv,framerate=30/1' ! x264enc bitrate=2000 ! queue ! mpegtsmux ! filesink location=testvid.mpeg
+   88  gst-launch v4l2src ! 'video/x-raw-yuv,width=640,height=360,framerate=30/1' ! tee name=t_vid ! queue ! xvimagesink sync=false t_vid. ! queue ! videorate ! 'video/x-raw-yuv,framerate=30/1' ! x264enc bitrate=2000 ! queue ! mpegtsmux ! filesink location=testvid.mpeg
+   89  gst-launch v4l2src ! 'video/x-raw-yuv,width=640,height=360,framerate=25/1' ! tee name=t_vid ! queue ! xvimagesink sync=false t_vid. ! queue ! videorate ! 'video/x-raw-yuv,framerate=25/1' ! x264enc bitrate=2000 ! queue ! mpegtsmux ! filesink location=testvid.mpeg
+   90  gst-launch -e -v v4l2src ! video/x-raw-yuv, framerate=30/1, width=640, height=360 ! x264enc bitrate=2000 ! mpegtsmux ! filesink location=video1.mpeg
+   91  gst-launch -e -v v4l2src ! video/x-raw-yuv, framerate=30/1, width=640, height=360 ! x264enc bitrate=1000 ! mpegtsmux ! filesink location=video1.mpeg
+   92  gst-launch -e -v v4l2src ! video/x-raw-yuv, framerate=30/1, width=640, height=360 ! x264enc bitrate=512 ! mpegtsmux ! filesink location=video1.mpeg
+   93  gst-launch v4l2src ! 'video/x-raw-yuv,width=640,height=360,framerate=25/1' ! tee name=t_vid ! queue ! xvimagesink sync=false t_vid. ! queue ! videorate ! 'video/x-raw-yuv,framerate=25/1' ! x264enc bitrate=512 ! queue ! mpegtsmux ! filesink location=testvid.mpeg
+   94  gst-launch v4l2src ! 'video/x-raw-yuv,width=640,height=360,framerate=25/1' ! tee name=t_vid ! queue ! xvimagesink sync=false t_vid. ! queue ! videorate ! 'video/x-raw-yuv,framerate=25/1' ! queue ! mpegtsmux ! filesink location=testvid.mpeg
+   95  gst-launch v4l2src ! 'video/x-raw-yuv,width=640,height=360,framerate=25/1' ! tee name=t_vid ! queue ! xvimagesink sync=false t_vid. ! queue ! videorate ! 'video/x-raw-yuv,framerate=25/1' ! mpegtsmux ! filesink location=testvid.mpeg
+   96  gst-launch v4l2src ! 'video/x-raw-yuv,width=640,height=360,framerate=25/1' ! tee name=t_vid ! queue ! xvimagesink sync=false t_vid. ! queue ! videorate ! 'video/x-raw-yuv,framerate=25/1' ! avimux ! filesink location=testvid.avi
+   97  gst-launch v4l2src ! 'video/x-raw-yuv,width=640,height=360,framerate=25/1' ! tee name=t_vid ! queue ! xvimagesink sync=false t_vid. ! queue ! videorate ! 'video/x-raw-yuv,framerate=25/1' ! mp4mux ! filesink location=testvid.mpeg
+   98  gst-launch v4l2src ! 'video/x-raw-yuv,width=640,height=360,framerate=25/1' ! tee name=t_vid ! queue ! xvimagesink sync=false t_vid. ! queue ! videorate ! 'video/x-raw-yuv,framerate=25/1' ! queue ! mp4mux ! filesink location=testvid.mpeg
+   99  gst-launch v4l2src ! 'video/x-raw-yuv,width=640,height=360,framerate=25/1' ! tee name=t_vid ! queue ! xvimagesink sync=false t_vid. ! queue ! videorate ! 'video/x-raw-yuv,framerate=25/1' ! queue ! avimux ! filesink location=testvid.avi
+  100* gst-launch v4l2src ! 'video/x-raw-yuv,width=640,height=360,framerate=25/1' ! tee name=t_vid ! queue ! xvimagesink sync=false t_vid. ! queue ! videorate ! 'video/x-raw-yuv,framerate=25/1' ! x264enc bitrate=512 ! queue ! avimux ! filesink location=testvid920.avi
+  101  gst-inspect x264enc
+  102  gst-launch -e -v v4l2src ! video/x-raw-yuv, framerate=30/1, width=640, height=360 ! x264enc bitrate=2000 ! mpegtsmux ! filesink location=video1.mpeg
+  103  gst-launch -e -v v4l2src ! video/x-raw-yuv, framerate=30/1, width=1920, height=1080 !  avimux ! filesink location=videoraw.avi
+  104  history
+  105  history > history1.txt
