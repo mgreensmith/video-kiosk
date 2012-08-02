@@ -6,7 +6,6 @@
 const int buttonPin = 2;
 const int ledPin = 13;
 
-
 int ledState = HIGH;         // the current state of the output pin
 int buttonState;             // the current reading from the input pin
 int lastButtonState = LOW;   // the previous reading from the input pin
@@ -48,6 +47,7 @@ void loop()
   
   if ((millis() - lastDebounceTime) > debounceDelay) {
     buttonState = reading;
+    //TODO: if buttonstate is high, send the serial packet
   }
 
   //digitalWrite(ledPin, buttonState);
