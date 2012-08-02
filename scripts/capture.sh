@@ -1,5 +1,5 @@
 #!/bin/bash
-
+set -x
 VIDEO_WIDTH=960
 VIDEO_HEIGHT=720
 FRAMERATE=30
@@ -34,6 +34,7 @@ begin_recording() {
 	if [[ ! -p $FIFO ]]; then
 		mkfifo $FIFO
 	fi
+	chmod 777 $FIFO
 
 	# prep the webcam
 	${v4l2ctl} --set-fmt-video=width=$VIDEO_WIDTH,height=$VIDEO_HEIGHT,pixelformat=1

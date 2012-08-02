@@ -137,16 +137,6 @@ void waitMsg() {
   drawOutlineString("    FOR JOHN AND JACQUI!", 50, 800, 3, #ffffff);
 }
 
-void startCapture() {
-  println("starting capture");
-  executeCommand("/home/matt/git/video-kiosk/scripts/capture.sh -b", false);
-}
-
-void stopCapture() {
-  println("stopping capture");
-  executeCommand("/home/matt/git/video-kiosk/scripts/capture.sh -e", false);
-}
-
 //TODO: abort on button press during start sequence
 void keyPressed() {
   if ( recording ) {
@@ -246,6 +236,15 @@ void draw() {
   }
 }
 
+void startCapture() {
+  println("starting capture");
+  executeCommand("/home/matt/git/video-kiosk/scripts/capture.sh -b", true);
+}
+
+void stopCapture() {
+  println("stopping capture");
+  executeCommand("/home/matt/git/video-kiosk/scripts/capture.sh -e", false);
+}
 
 //Execute a linux command
 String executeCommand(String command, boolean waitForResponse) {
