@@ -2,30 +2,25 @@ import processing.opengl.*;
 import codeanticode.glgraphics.*;
 import codeanticode.gsvideo.*;
 
+///////////////////////////////
+//  TUNEABLE PARAMETERS
+///////////////////////////////
+int canvasWidth = 1280;      //
+int canvasHeight = 960;      //
+int fr = 30;                 // Framerate
+float motionThreshold = 5;   // How different must a pixel be to be a "motion" pixel
+int blinkSpeed = 500;        // How fast should recording icon and button LED blink (in ms)?
+int maxIdleSec = 3;          // max time of no motion before we force end the recording
+///////////////////////////////
+
 GSCapture cam;
 GLTexture tex;
 GLTexture texIdle;
 GLGraphicsOffScreen offscreen;
-
-PImage img;
- 
-PFont f1000, f100;
+PImage img, imgPrev;
+PFont f1000;
 PImage recSymbol;
-
-// How different must a pixel be to be a "motion" pixel
-float motionThreshold = 50;
-
-int canvasWidth = 1280;
-int canvasHeight = 960;
-//framerate
-int fr = 30;
-
-int blinkSpeed = 500;
 int nextSwitch = 500;
-
-// maximum time of no motion before we automatically end the recording
-int maxIdleSec = 3;
-
 boolean textOn, recording, starting, stopping = false;
 int starttime, stoptime, seqtime, loopCount, idleTimer = 0;
 
@@ -35,8 +30,6 @@ void setup() {
   frameRate(fr);
   
   offscreen = new GLGraphicsOffScreen(this, width, height);
-  //offscreenIdle = new GLGraphicsOffScreen(this, width, height);
-  
   cam = new GSCapture(this, 640, 480, "/dev/video1");
   
   // Use texture tex as the destination for the camera pixels.
@@ -44,15 +37,9 @@ void setup() {
   cam.setPixelDest(tex);     
   cam.start(); 
   
-  //texture object to hold idle reference image, initialize to white.
-  texIdle = new GLTexture(this, tex.width, tex.height);
+  //for image differencing (motion detection)
   img = new PImage(tex.width, tex.height);
-  //texIdle.loadPixels();
-  //for (int i = 0; i < texIdle.pixels.length; i++) {
-  //  texIdle.pixels[i] = color(0); 
-  //}
-  //texIdle.loadTexture();
-
+  imgPrev = new PImage(tex.width, tex.height);
 
   f1000 = createFont("Arial",1000,true);
   recSymbol = loadImage("recording-icon.png");
@@ -102,7 +89,6 @@ void startRec() {
 void stopRec() {
   //stop recording pipeline here!
   recording = false;
-
   seqtime = millis() - stoptime;
   if ( seqtime < 3000 ) {
     textFont(f1000,300);
@@ -111,6 +97,7 @@ void stopRec() {
     stopping = false;
   }
 }
+
 
 void rec() {
   if (millis() > nextSwitch ) {
@@ -165,64 +152,51 @@ void draw() {
   /* 
   DONE (texIdle) have a reference texture loaded initially (all black or something)
   every second (loopCount is % frameRate, loadPixels of that texture and compare with stored image
-  if different, reset idle timer to 0
+  if different, load the current image into the reference image and reset idle timer to 0
   if the same, and idletimer is 0, load the texturepixels into the reference image, increment idle timer
   if the same, and idle timer > 0, increment idle timer
   if idle timer > allowed idle time, force end the recording.
   */
   
   // instantiate the reference
-   if ( loopCount == 0 ) {
-     tex.getImage(img);
-     texIdle.putImage(img);
+   if ( loopCount == 1 ) {
+     //stupid syntax, this actually puts tex into imgPrev 
+     tex.getImage(imgPrev);
    }
    
    loopCount++;
-   if ( ( loopCount % fr ) == 0 ) {
-     
+   if ( loopCount % fr  == 0 ) {
+     //put current frame into img
+     tex.getImage(img);
      //image differencing from http://www.openprocessing.org/sketch/40828  
-     tex.loadPixels();
-     texIdle.loadPixels();
-   
-     // Begin loop to walk through every pixel
-     // Start with a total of 0
+     img.loadPixels();
+     imgPrev.loadPixels();
+     
      float totalMotion = 0;
-   
-     // Sum the brightness of each pixel
-     for (int i = 0; i < tex.pixels.length; i ++ ) {
-       // Determine current color
-       color current = tex.pixels[i];
-     
-       // Determine color of reference image pixel
-       color previous = texIdle.pixels[i];
-     
-       // Compare reference vs. current color
+     for (int i = 0; i < img.pixels.length; i ++ ) {
+       color current = img.pixels[i];
+       color previous = imgPrev.pixels[i];
        float r1 = red(current);
        float g1 = green(current);
        float b1 = blue(current);
        float r2 = red(previous);
        float g2 = green(previous);
        float b2 = blue(previous);
-     
-       // Motion for an individual pixel is the difference between the previous color and current color.
        float diff = dist(r1,g1,b1,r2,g2,b2);
-       
-       //println("color_current:" + current + "  color_previous:" +  previous + "  diff:" + diff );
-       // totalMotion is the sum of all color differences.
-       totalMotion += diff;
+       totalMotion += diff;    
+       if ( i % 1000 == 0 ) {
+         println("r1:" + r1 + " r2:" + r2);
+       }
     }
-   
-    // averageMotion is total motion divided by the number of pixels analyzed.
-    float avgMotion = totalMotion / tex.pixels.length;
-    
-    println(avgMotion);
-    
+    float avgMotion = totalMotion / img.pixels.length;
+
     if (avgMotion > motionThreshold) {
+      tex.getImage(imgPrev);
       // reset idle timer if we have motion
       idleTimer = 0;
-    } else {
+    } else {  // no motion
       if ( idleTimer == 0 ) {
-        texIdle.getImage(tex);
+        tex.getImage(imgPrev);
         idleTimer++;
       } else {
         if ( idleTimer > maxIdleSec ) {
@@ -234,10 +208,6 @@ void draw() {
   } // end if loopcount % fr
   
   
-  
-  
-  
-  
   if ( starting ) {
     startRec();
   } else if ( stopping ) {
@@ -247,6 +217,4 @@ void draw() {
   } else {
     waitMsg();
   }
- 
-  
 }
