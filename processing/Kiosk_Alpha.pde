@@ -238,12 +238,12 @@ void draw() {
 
 void startCapture() {
   println("starting capture");
-  executeCommand("/home/matt/git/video-kiosk/scripts/capture.sh -b", true);
+  executeCommand("sudo -u capture -i /home/matt/git/video-kiosk/scripts/capture.sh -b", false);
 }
 
 void stopCapture() {
   println("stopping capture");
-  executeCommand("/home/matt/git/video-kiosk/scripts/capture.sh -e", false);
+  executeCommand("sudo -u capture -i /home/matt/git/video-kiosk/scripts/capture.sh -e", false);
 }
 
 //Execute a linux command
