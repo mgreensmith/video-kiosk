@@ -1,5 +1,5 @@
 #!/bin/bash
-set -x
+#set -x
 VIDEO_WIDTH=960
 VIDEO_HEIGHT=720
 FRAMERATE=30
@@ -41,7 +41,7 @@ begin_recording() {
 	${v4l2ctl} --set-parm=$FRAMERATE
 
 	${capture} $CAPTURE_OPTS > $FIFO  &
-	${gstlaunch} $GST_OPTS $GST_PIPELINE  &
+	${gstlaunch} $GST_OPTS $GST_PIPELINE  > $WORK_DIR/gst.log 2>&1 &
 	echo $!>$PIDFILE
 }
 
@@ -61,7 +61,7 @@ while getopts ":be" opt; do
 		e)
 			# stop recording
 			recording
-			[ $? -eq 0 ] && kill -INT `cat $PIDFILE` && rm -f $PIDFILE || exit 1
+			[ $? -eq 0 ] && kill -INT `cat $PIDFILE` && rm -f $PIDFILE && rm -f $FIFO || exit 1
 			exit 0
 			;;
 		\?)
