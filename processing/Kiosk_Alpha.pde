@@ -11,7 +11,7 @@ int canvasHeight = 960;      //
 int fr = 30;                 // Framerate
 float motionThreshold = 6;   // How different must a pixel be to be a "motion" pixel
 int blinkSpeed = 500;        // How fast should recording icon and button LED blink (in ms)?
-int maxIdleSec = 10;          // max time of no motion before we force end the recording
+int maxIdleSec = 10;         // max time of no motion before we force end the recording
 ///////////////////////////////
 
 GSCapture cam;
@@ -72,15 +72,15 @@ void startRec() {
   } else if ( seqtime < 4000 ) {
     drawOutlineString("2", 340, 840, 10, #ffffff);
   } else if ( seqtime < 5000 ) {
-    drawOutlineString("1", 340, 840, 10, #ffffff);
-  } else if ( seqtime < 6000 ) {
-    textFont(f1000,600);
-    drawOutlineString("GO!", 80, 740, 7, #ffffff);
-    // account for startup time of the capture pipeline
+    // launch the capture pipeline early to account for startup time
     if ( ! recording ) {
       startCapture();
       recording = true;
     }
+    drawOutlineString("1", 340, 840, 10, #ffffff);
+  } else if ( seqtime < 6000 ) {
+    textFont(f1000,600);
+    drawOutlineString("GO!", 80, 740, 7, #ffffff);
   } else {
     starting = false;    
   }
@@ -88,10 +88,9 @@ void startRec() {
 
 
 void stopRec() {
-  //stop recording pipeline here!
   recording = false;
   seqtime = millis() - stoptime;
-  if ( seqtime < 3000 ) {
+  if ( seqtime < 5000 ) {
     textFont(f1000,300);
     drawOutlineString("Thanks!", 80, 500, 5, #ffffff);
   } else {
@@ -122,7 +121,7 @@ void displayIdleTimerWarning(int seconds) {
   textFont(f1000, 85);
   drawOutlineString("   ENDING RECORDING IN", 50, 500, 3, #ffffff);
   textFont(f1000, 250);
-  drawOutlineString(" " + seconds + " ", 500, 700, 3, #ffffff);
+  drawOutlineString("" + seconds + " ", 500, 700, 3, #ffffff);
   
 }
 
